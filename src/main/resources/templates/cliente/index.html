@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html th:fragment = "layout (template)" >
-<head>
-<meta charset="UTF-8" />
-<title>Insert title here</title>
-</head>
+<html th:replace="~{fragments/layout :: layout (~{::body})}">
 <body>
-<h1>Página do cliente</h1>
+	<h1>Estou na Página do Cliente</h1>
+	<a href="/cliente/cadastro">Cadastro</a>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-sm table-striped table-hover table-border">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>CPF</th>
+						<th>Data</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="c : ${clientes}">
+						<td th:text="${c.id}">
+						<td th:text="${c.nome}">
+						<td th:text="${c.cpf}">
+						<td th:text="${#dates.format(c.data,'dd/MM/yyyy')}">
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>
