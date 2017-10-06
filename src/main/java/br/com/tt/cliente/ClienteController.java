@@ -1,8 +1,12 @@
 package br.com.tt.cliente;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,8 +28,22 @@ public class ClienteController {
 	}
 
 	@GetMapping("/cadastro")
-	String cadastro() {
-		return "/cliente/cadastro";
+	ModelAndView cadastro(Cliente cliente) {
+
+		ModelAndView mv = new ModelAndView("/cliente/cadastro");
+		mv.addObject("cliente", cliente);
+		return mv;
+	}
+
+	@PostMapping("/salvar")
+	ModelAndView salvar(@Valid Cliente cliente, BindingResult result) {
+		if (result.hasErrors()) {
+			return this.cadastro(cliente);
+		}
+
+		service.salvar(cliente);
+		return this.cliente();
+
 	}
 
 }
