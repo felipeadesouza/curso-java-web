@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,6 +45,17 @@ public class ClienteController {
 		service.salvar(cliente);
 		return this.cliente();
 
+	}
+	
+	@GetMapping("/editar/{id}")
+	ModelAndView editar(@PathVariable("id") Long id) {
+		return cadastro(service.buscar(id));
+	}
+	
+	@GetMapping("/excluir/{id}")
+	ModelAndView excluir(@PathVariable("id") Long id) {
+		service.excluir(id);
+		return cliente();
 	}
 
 }

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html th:replace="~{fragments/layout :: layout (~{::body})}">
-<body>
+<body style="padding: 10px">
 	<h1>Estou na Página do Cliente</h1>
 	<div class="panel-body">
+		<div>
+			<a class="btn btn-sm btn-success" href="/cliente/cadastro" style="margin: 15px">Cadastrar Novo</a>
+		</div>
 		<div class="table-responsive">
 			<table class="table table-sm table-striped table-hover table-border">
 				<thead>
@@ -11,6 +14,7 @@
 						<th>Nome</th>
 						<th>CPF</th>
 						<th>Data</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -19,13 +23,18 @@
 						<td th:text="${c.nome}">
 						<td th:text="${c.cpf}">
 						<td th:text="${#dates.format(c.data,'dd/MM/yyyy')}">
+						<td>
+							<div class="btn-group pull-right">
+								<a class="btn btn-sm btn-primary"
+									th:href="@{/cliente/editar/{id}(id=${c.id})}"> Editar </a> <a
+									class="btn btn-sm btn-danger"
+									th:href="@{/cliente/excluir/{id}(id=${c.id})}"> Excluir </a>
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-	</div>
-	<div>
-		<a href="/cliente/cadastro">Cadastro</a>
 	</div>
 </body>
 </html>

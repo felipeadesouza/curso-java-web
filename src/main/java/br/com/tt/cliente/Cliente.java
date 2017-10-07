@@ -22,13 +22,14 @@ public class Cliente {
 	@GeneratedValue(strategy = IDENTITY)
 	private Long id;
 	@Column(nullable = false)
-	@NotBlank(message="Nome é informação Obrigatória")
+	@NotBlank(message = "Nome é informação obrigatória")
 	private String nome;
 	@Column(length = 11)
-	@Pattern(regexp="\\d{11}", message="Cpf necessita ter 11 digitos")
+	@NotBlank(message = "Cpf é informação obrigatória")
+	@Pattern(regexp = "\\d{11}", message = "Cpf necessita ter 11 digitos")
 	private String cpf;
 	@Temporal(DATE)
-	@DateTimeFormat(pattern = "yyy-mm-dd")
+	@DateTimeFormat(pattern = "yyy-MM-dd")
 	private Date data;
 
 	public Cliente() {
