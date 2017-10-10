@@ -23,7 +23,7 @@
 					<tr th:each="c : ${clientes}">
 						<td th:text="${c.id}">
 						<td th:text="${c.nome}">
-						<td th:text="${beans.cv.cpf(c.cpf)}">
+						<td th:text="${c.cpf}">
 						<td th:text="${#dates.format(c.data,'dd/MM/yyyy')}">
 						<td>
 							<div class="btn-group pull-right">
