@@ -46,9 +46,17 @@ public class ClienteService {
 	public CadastroReceita consultaReceita(String cnpj) throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
-		String receitaJson = HttpClient.get("");
+		
+		String url = "https://www.receitaws.com.br/v1/cnpj/27865757000102";
+			
+		String receitaJson = HttpClient.get(url);
 		CadastroReceita cadReceita = mapper.readValue(receitaJson, CadastroReceita.class);
+		System.out.println(cadReceita.getFantasia());
 		return null;
+	}
+	
+	public static void main(String[] args) throws Exception {
+		new ClienteService().consultaReceita("");
 	}
 
 }

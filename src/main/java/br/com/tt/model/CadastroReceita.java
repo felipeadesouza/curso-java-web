@@ -1,5 +1,8 @@
 package br.com.tt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CadastroReceita {
 
 	private String cnpj;
