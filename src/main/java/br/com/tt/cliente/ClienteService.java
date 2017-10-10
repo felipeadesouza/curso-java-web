@@ -1,9 +1,18 @@
 package br.com.tt.cliente;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.com.tt.exception.SistemaException;
+import br.com.tt.model.CadastroReceita;
+import br.com.tt.util.convert.HttpClient;
 
 @Service
 public class ClienteService {
@@ -31,7 +40,15 @@ public class ClienteService {
 
 	public void excluir(Long id) {
 		repository.delete(id);
-		
+
+	}
+
+	public CadastroReceita consultaReceita(String cnpj) throws Exception {
+
+		ObjectMapper mapper = new ObjectMapper();
+		String receitaJson = HttpClient.get("");
+		CadastroReceita cadReceita = mapper.readValue(receitaJson, CadastroReceita.class);
+		return null;
 	}
 
 }
