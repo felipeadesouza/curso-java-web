@@ -1,4 +1,4 @@
-package br.com.tt.util.convert;
+package br.com.tt.util;
 
 import org.springframework.stereotype.Service;
 

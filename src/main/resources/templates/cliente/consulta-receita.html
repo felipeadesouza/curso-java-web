@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout (~{::body})}">
+<meta charset="UTF-8">
+<body>
+	<h1>Consulta Receita</h1>
+
+	<div class="panel-body">
+
+		<form th:object="${cadastroReceita}" th:action="@{/cliente/consulta/receita}"
+			method="post" class="form-horizontal" style="margin: 15px">
+
+			<div class="form-group">
+				<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+					<div th:each="detailedError : ${#fields.detailedErrors()}">
+						<span th:text="${detailedError.message}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="cnpj">Cnpj:</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{cnpj}" class="form-control"
+						id="cnpj" placeholder="Digite o cnpj">
+				</div>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-sm btn-primary">Consultar</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

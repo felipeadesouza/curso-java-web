@@ -1,5 +1,7 @@
 package br.com.tt.cliente;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import br.com.tt.exception.SistemaException;
+import br.com.tt.model.CadastroReceita;
 
 @Controller
 @RequestMapping("/cliente")
@@ -56,6 +61,34 @@ public class ClienteController {
 	ModelAndView excluir(@PathVariable("id") Long id) {
 		service.excluir(id);
 		return cliente();
+	}
+	
+	@GetMapping("/consulta/receita")
+	ModelAndView telaconsultaReceita() {
+		ModelAndView mv = new ModelAndView("/cliente/consulta-receita");
+		mv.addObject("cadastroReceita", new CadastroReceita());
+		return mv;
+	}
+	
+	@PostMapping("/consulta/receita")
+	ModelAndView consultaReceita(CadastroReceita cadastroReceita) throws SistemaException {
+		
+		
+		Cliente cliente = new Cliente();
+
+		
+		List<Cliente> clientes = service.consulta(cadastroReceita.getCnpj());
+		if (clientes != null && !clientes.isEmpty()) {
+			cliente = clientes.get(0);
+		}else {
+			cadastroReceita = service.consultaReceita(cadastroReceita.getCnpj());
+			cliente.setNome(cadastroReceita.getFantasia());
+			cliente.setCnpj(cadastroReceita.getCnpj().replace(".", "").replace("/", "").replace("-", ""));
+			cliente.setData(cadastroReceita.getAbertura());
+		}
+		 
+		return cadastro(cliente);
+		
 	}
 
 }

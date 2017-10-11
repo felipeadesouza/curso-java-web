@@ -24,10 +24,10 @@ public class Cliente {
 	@Column(nullable = false)
 	@NotBlank(message = "Nome é informação obrigatória")
 	private String nome;
-	@Column(length = 11)
-	@NotBlank(message = "Cpf é informação obrigatória")
-	@Pattern(regexp = "\\d{11}", message = "Cpf necessita ter 11 digitos")
-	private String cpf;
+	@Column(length = 14)
+	@NotBlank(message = "Cnpj é informação obrigatória")
+	@Pattern(regexp = "\\d{14}", message = "Cnpj necessita ter 14 digitos")
+	private String cnpj;
 	@Temporal(DATE)
 	@DateTimeFormat(pattern = "yyy-MM-dd")
 	private Date data;
@@ -37,11 +37,11 @@ public class Cliente {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cliente(Long id, String nome, String cpf, Date data) {
+	public Cliente(Long id, String nome, String cnpj, Date data) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.cpf = cpf;
+		this.cnpj = cnpj;
 		this.data = data;
 	}
 
@@ -61,12 +61,12 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	public Date getData() {

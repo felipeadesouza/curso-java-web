@@ -1,4 +1,4 @@
-package br.com.tt.util.convert;
+package br.com.tt.util;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;

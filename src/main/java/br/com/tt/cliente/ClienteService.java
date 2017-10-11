@@ -1,18 +1,15 @@
 package br.com.tt.cliente;
 
-import java.io.IOException;
+import static br.com.tt.util.HttpClient.get;
+import static br.com.tt.util.Util.jsonToObject;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import br.com.tt.exception.SistemaException;
 import br.com.tt.model.CadastroReceita;
-import br.com.tt.util.convert.HttpClient;
 
 @Service
 public class ClienteService {
@@ -25,6 +22,13 @@ public class ClienteService {
 		List<Cliente> resultado = repository.findAll();
 		// List<Cliente> resultado = repository.clientesOrdenadoNome();
 		// List<Cliente> resultado = repository.findByNomeLike("%Fel%");
+
+		return resultado;
+	}
+	
+	List<Cliente> consulta(String cnpj) {
+
+		List<Cliente> resultado = repository.findByCnpjLike(cnpj);
 
 		return resultado;
 	}
@@ -43,20 +47,14 @@ public class ClienteService {
 
 	}
 
-	public CadastroReceita consultaReceita(String cnpj) throws Exception {
+	public CadastroReceita consultaReceita(String cnpj) throws SistemaException {
+		return jsonToObject(get("https://www.receitaws.com.br/v1/cnpj/" + cnpj), CadastroReceita.class);
 
-		ObjectMapper mapper = new ObjectMapper();
-		
-		String url = "https://www.receitaws.com.br/v1/cnpj/27865757000102";
-			
-		String receitaJson = HttpClient.get(url);
-		CadastroReceita cadReceita = mapper.readValue(receitaJson, CadastroReceita.class);
-		System.out.println(cadReceita.getFantasia());
-		return null;
 	}
-	
-	public static void main(String[] args) throws Exception {
-		new ClienteService().consultaReceita("");
+
+	public static void main(String[] args) throws SistemaException {
+		CadastroReceita cad = new ClienteService().consultaReceita("27865757000102");
+		System.out.println(cad.getAbertura());
 	}
 
 }

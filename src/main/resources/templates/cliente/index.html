@@ -14,7 +14,7 @@
 					<tr>
 						<th>ID</th>
 						<th>Nome</th>
-						<th>CPF</th>
+						<th>Cnpj</th>
 						<th>Data</th>
 						<th></th>
 					</tr>
@@ -23,7 +23,7 @@
 					<tr th:each="c : ${clientes}">
 						<td th:text="${c.id}">
 						<td th:text="${c.nome}">
-						<td th:text="${c.cpf}">
+						<td th:text="${c.cnpj}">
 						<td th:text="${#dates.format(c.data,'dd/MM/yyyy')}">
 						<td>
 							<div class="btn-group pull-right">
