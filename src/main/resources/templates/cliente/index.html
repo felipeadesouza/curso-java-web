@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html th:replace="~{fragments/layout :: layout (~{::body})}">
 <body style="padding: 10px">
-	<h1>Estou na Página do Cliente</h1>
+	<h1>Página do Cliente</h1>
 	<div class="panel-body">
 		<div>
 			<a class="btn btn-sm btn-success" href="/cliente/cadastro"
 				style="margin: 15px">Cadastrar Novo</a>
+				
+			<a class="btn btn-sm btn-success" href="/cliente/consulta/receita"
+				style="margin: 15px">Consultar CNPJ</a>
 		</div>
 		<div class="table-responsive">
 			<table
